@@ -1,33 +1,26 @@
+// This time no story, no theory. The examples below show you how to write function accum:
+
+// Examples:
 // accum("abcd") -> "A-Bb-Ccc-Dddd"
 // accum("RqaEzty") -> "R-Qq-Aaa-Eeee-Zzzzz-Tttttt-Yyyyyyy"
 // accum("cwAt") -> "C-Ww-Aaa-Tttt"
+
 
 // ONGOING
 
 const sentence = "ZpglnRxqenU"
 
 const accum = (string) => {
-  const charIndex = {}
-  let i = 0;
-  for (let char of string) {
-    charIndex[char] = i + 1;
-    i++
-  }
-  console.log("Char Index: ", charIndex)
   const result = []
-  for (let char in charIndex) {
-    if (charIndex[char] !== 1) {
-      result.push("-")
-    }
-    for (let i = 0; i < charIndex[char]; i++) {
-      if (i == 0) {
-        result.push(char.toUpperCase());
-      } else {
-        result.push(char.toLowerCase())
-      }
-    }
+  for (let i = 0; i < string.length; i++) {
+    const char = string[i].toUpperCase() + string[i].toLowerCase().repeat(i)
+    // get the 'i' letter and capitalise. Then add a lowercase version as many times as the index
+    result.push(char)
   }
-  return result.join("");
+  
+  return result.join("-");
 }
+
+
 
 console.log(accum(sentence))
