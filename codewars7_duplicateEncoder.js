@@ -9,16 +9,14 @@
 // "Success"  =>  ")())())"
 // "(( @"     =>  "))((" 
 
-
+// ( - if once
+// ) - if more than once
 
 const duplicateEncode = (word) => {
-  const alphabet = "abcdefghijklmnopqrstuvwxyz"
+  const characters = "abcdefghijklmnopqrstuvwxyz!@£$%^&*()?><~"
   let obj = {}
   for (let char of word.toLowerCase()) {
-    if (alphabet.includes(char.toLowerCase())) {
-      // if alphabet contains letter - do the next. Otherwise skip. Will stop the issue with multiple letters
-      // then delete letter from alphabet to prevent duplication checking
-      // does this need to be done here, or at the next for loop?
+    if (characters.includes(char.toLowerCase())) {
       for (let letter of word.toLowerCase()) {
         if (char == letter) {
           if (obj[char]) {
@@ -31,12 +29,22 @@ const duplicateEncode = (word) => {
 
     } 
   }
-  return obj
+
+  const returnArray = []
+
+  for (let letter of word.toLowerCase()) {
+    if (obj[letter] > 1) {
+      returnArray.push(')')
+    } else {
+      returnArray.push('(')
+    }
+  }
+
+  const returnString = returnArray.join('')
+  return returnString
 }
 
-// thought - maybe check if it's in alphabet. If you get it once, remove from alphabet. Might prevent duplication
-
-// currently, if there are 2 of a specific letter, it checks against them twice. Hence 'T' having 4. 
-// if there was 3, it would return 9 (squares effectively)
-
-console.log(duplicateEncode("testt"))
+console.log(duplicateEncode("din"))
+console.log(duplicateEncode("recede"))
+console.log(duplicateEncode("Success"))
+console.log(duplicateEncode("(( @"))
