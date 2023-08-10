@@ -13,7 +13,7 @@
 // ) - if more than once
 
 const duplicateEncode = (word) => {
-  const characters = "abcdefghijklmnopqrstuvwxyz!@£$%^&*()?><~"
+  const characters = "abcdefghijklmnopqrstuvwxyz!@£$%^&*()?><~ "
   let obj = {}
   for (let char of word.toLowerCase()) {
     if (characters.includes(char.toLowerCase())) {
