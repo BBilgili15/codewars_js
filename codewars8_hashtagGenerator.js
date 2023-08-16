@@ -9,13 +9,7 @@
 // If the input or the result is an empty string it must return false.
 
 
-
-// WORK IN PROGRESS
-
 const generateHashtag = (string) => {
-  if (string.length > 140 || !string) {
-    return false
-  } else {
     const array = ['#']
     let foundSpace = false
     for (const letter of string) {
@@ -32,13 +26,17 @@ const generateHashtag = (string) => {
       
     }
 
-    return array.join("")
-    // JUST NEED TO CAPITALISE FIRST LETTER OF FIRST WORD
-  }
-
-
+    const hashtag = array.join("").replace(/\b\w/g, match => match.toUpperCase());
+    if (hashtag.length > 140 || hashtag == "#") {
+      return false
+    } else {
+      return hashtag
+    }
+  
 }
 
 console.log(generateHashtag("This is my hashtag"))
 console.log(generateHashtag("This is my hashtagThis is my hashtagThis is my hashtagThis is my hashtagThis is my hashtagThis is my hashtagThis is my hashtagThis is my hashtagThis is my hashtagThis is my hashtagThis is my hashtagThis is my hashtagThis is my hashtagThis is my hashtagThis is my hashtagThis is my hashtagThis is my hashtagThis is my hashtagThis is my hashtagThis is my hashtagThis is my hashtagThis is my hashtagThis is my hashtagThis is my hashtag"))
 console.log(generateHashtag(""))
+console.log(generateHashtag("Codewars"))
+console.log(generateHashtag("code" + " ".repeat(140) + "wars"))
